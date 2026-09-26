@@ -2,9 +2,10 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="format-detection" content="telephone=no">
 <title>MB Repasse | Venda, Troca e Financiamento de Carros</title>
-<meta name="description" content="Encontre seu próximo carro na MB Repasse. Veículos de repasse, opções de venda, troca e financiamento. Confira os veículos disponíveis e fale com nossa equipe pelo WhatsApp.">
+<meta name="description" content="MB Repasse: venda, troca e financiamento de veículos de repasse com transparência total. Encontre o carro ideal, avalie seu veículo ou consulte condições de financiamento com nossa equipe especializada.">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://www.mbrepasse.com.br/">
 
@@ -12,14 +13,27 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MB Repasse">
 <meta property="og:title" content="MB Repasse | Venda, Troca e Financiamento de Carros">
-<meta property="og:description" content="Encontre seu próximo carro na MB Repasse. Veículos de repasse, opções de venda, troca e financiamento.">
+<meta property="og:description" content="MB Repasse: venda, troca e financiamento de veículos de repasse. Transparência total do primeiro contato à entrega.">
 <meta property="og:url" content="https://www.mbrepasse.com.br/">
 <meta property="og:locale" content="pt_BR">
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="MB Repasse | Venda, Troca e Financiamento de Carros">
-<meta name="twitter:description" content="Encontre seu próximo carro na MB Repasse. Veículos de repasse, venda, troca e financiamento.">
+<meta name="twitter:description" content="MB Repasse: venda, troca e financiamento de veículos de repasse. Transparência total do primeiro contato à entrega.">
+
+<!-- App (tela inicial / instalação) -->
+<meta name="theme-color" content="#0a0a0b">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="MB Repasse">
+<meta name="application-name" content="MB Repasse">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="icon" href="logo.svg" type="image/svg+xml">
+<link rel="icon" href="icons/favicon-64.png" type="image/png">
+<link rel="mask-icon" href="logo.svg" color="#d91f2c">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -58,6 +72,7 @@
     --maxw: 1180px;
     --font-head: 'Barlow Condensed', sans-serif;
     --font-body: 'Manrope', sans-serif;
+    --wrap-pad: 20px;
   }
 
   *{box-sizing:border-box;}
@@ -78,7 +93,7 @@
   a{color:inherit; text-decoration:none;}
   button{font-family:inherit; cursor:pointer;}
   h1,h2,h3{font-family:var(--font-head); font-weight:700; margin:0; letter-spacing:.2px; text-wrap:balance;}
-  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 20px;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 var(--wrap-pad);}
   .eyebrow{
     font-family:var(--font-head);
     font-size:14px;
@@ -141,7 +156,7 @@
   }
   @media (max-width:380px){
     header.site .bar{ height:64px; }
-    .wrap{ padding:0 14px; }
+    :root{ --wrap-pad:14px; }
   }
 
   /* Hero */
@@ -192,12 +207,13 @@
 
   .hero-copy h1{ font-size:clamp(40px,7vw,72px); line-height:0.98; }
   .hero-copy .lead{ margin-top:18px; font-size:18px; color:var(--text-muted); max-width:480px; }
-  .hero-services{ display:flex; gap:18px; margin-top:22px; flex-wrap:wrap; }
+  .hero-services{ display:flex; gap:10px; margin-top:20px; flex-wrap:wrap; justify-content:center; }
   .hero-services span{
-    font-family:var(--font-head); font-weight:600; font-size:16px; letter-spacing:.3px; color:var(--text);
-    padding-bottom:4px; border-bottom:2px solid var(--red);
+    font-family:var(--font-head); font-weight:600; font-size:15px; letter-spacing:.3px; color:var(--text);
+    padding:8px 16px; border-radius:var(--radius);
+    background:rgba(217,31,44,0.10);
   }
-  .hero-ctas{ display:flex; gap:14px; margin-top:34px; flex-wrap:wrap; }
+  .hero-ctas{ display:flex; gap:12px; margin-top:30px; flex-wrap:wrap; justify-content:center; }
 
   .scroll-cue{
     display:flex; align-items:center; gap:8px; margin-top:44px;
@@ -288,8 +304,8 @@
     display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:center;
   }
   @media (max-width:860px){ .split{ grid-template-columns:1fr; } }
-  .split.reverse .split-visual{ order:2; }
-  @media (max-width:860px){ .split.reverse .split-visual{ order:0; } }
+  .split.reverse .split-visual{ order:1; }
+  @media (max-width:860px){ .split.reverse .split-visual{ order:0; .split-text{ order:1; } } }
   .split-visual{
     aspect-ratio:16/11; background:var(--surface); border:1px solid var(--border);
     display:flex; align-items:center; justify-content:center;
@@ -338,13 +354,23 @@
   .final-cta{
     text-align:center; padding:96px 0;
     background:
-      radial-gradient(circle at 50% 0%, rgba(217,31,44,0.16), transparent 55%),
+      radial-gradient(circle at 50% 0%, rgba(217,31,44,0.20), transparent 50%),
       var(--bg);
     border-top:1px solid var(--border-soft);
+    position:relative;
+    overflow:hidden;
   }
-  .final-cta h2{ font-size:clamp(30px,5vw,52px); max-width:700px; margin:0 auto; }
-  .final-cta p{ color:var(--text-muted); margin-top:14px; font-size:17px; }
-  .final-cta .btn{ margin-top:30px; }
+  .final-cta::before{
+    content:''; position:absolute; top:-50%; left:-50%; width:200%; height:200%;
+    background:radial-gradient(circle at 30% 20%, rgba(217,31,44,0.15) 0%, transparent 50%),
+                 radial-gradient(circle at 70% 80%, rgba(217,31,44,0.10) 0%, transparent 50%);
+    pointer-events:none;
+    z-index:0;
+  }
+  .final-cta .wrap{ position:relative; z-index:1; }
+  .final-cta h2{ font-size:clamp(30px,5vw,52px); max-width:700px; margin:0 auto 24px; color:var(--text); }
+  .final-cta p{ color:var(--text-muted); margin-top:0; font-size:17px; line-height:1.6; max-width:600px; margin-left:auto; margin-right:auto; }
+  .final-cta .btn{ margin-top:34px; }
 
   /* Footer */
   footer.site{ background:var(--bg-alt); border-top:1px solid var(--border-soft); padding:56px 0 110px; }
@@ -576,6 +602,171 @@
 
   .sr-only{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; }
   :focus-visible{ outline:2px solid var(--red); outline-offset:2px; }
+
+  /* ============================================================
+     MODO APP / MOBILE
+     ============================================================ */
+  html{ -webkit-text-size-adjust:100%; text-size-adjust:100%; scroll-padding-top:86px; }
+  body{ -webkit-tap-highlight-color:rgba(217,31,44,0.20); overscroll-behavior-y:none; }
+  a, button, input, select, textarea, .chip, .vcard, .qr-btn, .modal-thumb, .icon-btn{
+    touch-action:manipulation;
+  }
+  img{ -webkit-user-drag:none; user-drag:none; }
+
+  /* Logo com o símbolo do app */
+  .logo{ display:inline-flex; align-items:center; gap:10px; }
+  .logo-mark{
+    width:40px; height:40px; display:block; flex-shrink:0; border-radius:10px;
+    box-shadow:0 4px 14px rgba(0,0,0,.55), 0 0 0 1px rgba(255,255,255,.07);
+  }
+  .logo-text{ font-family:var(--font-head); font-weight:800; font-size:26px; letter-spacing:.5px; line-height:1; display:block; }
+  .logo .logo-text{ color:var(--text); }
+  .logo .logo-text span{ color:var(--red); }
+  .logo:active{ opacity:.85; }
+
+  /* Áreas seguras (entelha / barra de gestos) */
+  header.site{ padding-top:env(safe-area-inset-top); }
+  .modal-overlay{ padding-top:env(safe-area-inset-top); }
+
+  /* Alvos de toque maiores */
+  .btn{ min-height:46px; }
+  .btn-sm{ min-height:40px; }
+  .icon-btn{ min-width:42px; min-height:42px; }
+  .chip{ display:inline-flex; align-items:center; min-height:42px; }
+
+  /* Cartões com acabamento mais premium */
+  .vcard{ box-shadow:0 10px 30px rgba(0,0,0,.35); }
+  .vcard:hover{ box-shadow:0 16px 40px rgba(0,0,0,.45); }
+  .vcard .body{ background:linear-gradient(180deg, rgba(255,255,255,.02), transparent 60%); }
+
+  @media (max-width:720px){
+    /* Cabeçalho compacto */
+    .logo-mark{ width:34px; height:34px; border-radius:8px; }
+    .logo-text, .logo{ font-size:20px; }
+    header.site .bar{ height:62px; }
+    header.site{ backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); background:rgba(10,10,11,.92); }
+
+    /* Títulos mais impactantes no celular */
+    h2.title{ font-size:clamp(27px,7.6vw,36px); }
+    .subtitle{ font-size:15.5px; }
+    .eyebrow{ font-size:13px; letter-spacing:.6px; }
+
+    /* Busca + filtros em faixa deslizante - organizada para touch */
+    .toolbar{ gap:10px; margin-bottom:24px; flex-wrap:nowrap; }
+    .search-box{ min-width:100%; }
+    .search-box input{ padding:14px 14px 14px 42px; font-size:15px; }
+    .filter-chips{
+      flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none;
+      -webkit-overflow-scrolling:touch; scroll-snap-type:x proximity;
+      margin:0 -16px; padding:0 16px 2px;
+      gap:6px; /* Espaçamento maior para toque */
+    }
+    .filter-chips::-webkit-scrollbar{ display:none; }
+    .chip{ flex:0 0 auto; white-space:nowrap; scroll-snap-align:start; padding:11px 18px; font-size:14px; }
+
+    /* Confiança - maiores para touch */
+    .trust-item{ padding:16px 14px; gap:14px; justify-content:flex-start; }
+    .trust-item svg{
+      width:22px; height:22px; padding:9px; box-sizing:content-box; border-radius:12px;
+      background:rgba(217,31,44,.10); border:1px solid rgba(217,31,44,.30); color:var(--red);
+    }
+    .trust-item strong{ font-size:16px; }
+    .trust-item small{ font-size:12px; }
+
+    /* Botões cheios e confortáveis para dedos */
+    .hero-ctas .btn{ min-height:56px; font-size:16px; padding:14px 28px; }
+    .split-text .btn{ width:100%; justify-content:center; min-height:56px; padding:14px 28px; }
+    .final-cta .btn{ min-height:56px; padding:16px 36px; font-size:16px; }
+
+    /* Cartões de veículos - tocável */
+    .vehicle-grid{ gap:20px; }
+    .vcard .media{ aspect-ratio:16/11; }
+    .vcard .body{ padding:20px; }
+    .vcard h3{ font-size:22px; }
+    .vcard .price{ font-size:26px; }
+    .vcard .btn{ min-height:48px; padding:12px 20px; font-size:14px; }
+
+    /* Painéis organizados verticalmente no mobile */
+    .split-visual{ aspect-ratio:16/10; order:1; } /* Visual em primeiro no mobile */
+    .split-text{ order:2; } /* Texto em segundo */
+    .split-text p{ font-size:15px; margin-top:12px; }
+    .team-card{ padding:20px; margin-bottom:16px; }
+    .insta-band{ padding:28px 0; }
+    .insta-band h3{ font-size:18px; }
+    .final-cta{ padding:60px 0 40px; }
+
+    /* Rodapé - área segura acima da barra */
+    footer.site{ padding-bottom:calc(100px + env(safe-area-inset-bottom)); }
+
+    /* Barra do WhatsApp com área segura */
+    .mobile-bar{
+      padding:16px 16px calc(16px + env(safe-area-inset-bottom));
+      min-height:56px; letter-spacing:.4px;
+      background:linear-gradient(180deg,#e12334 0%,#c11722 60%,#a3151f 100%);
+      box-shadow:0 -10px 26px rgba(0,0,0,.45);
+    }
+    .mobile-bar:active{ filter:brightness(1.08); }
+
+    /* Botão flutuante do assistente - maior para touch */
+    .fab{
+      bottom:calc(92px + env(safe-area-inset-bottom)); right:14px; width:60px; height:60px;
+      box-shadow:0 14px 36px rgba(217,31,44,.5), 0 0 0 8px rgba(217,31,44,.12);
+    }
+    .assist-panel{
+      bottom:calc(160px + env(safe-area-inset-bottom)); right:14px;
+      max-width:calc(100vw - 28px);
+      padding:12px;
+      box-shadow:0 24px 60px rgba(0,0,0,.6);
+    }
+
+    .assist-head strong{ font-size:18px; }
+    .assist-head p{ font-size:13px; }
+
+    .toast{ bottom:calc(84px + env(safe-area-inset-bottom)); font-size:14px; padding:14px 20px; }
+  }
+
+  @media (max-width:600px){
+    .hero{ padding:26px 0 0; }
+    .hero-copy h1{ font-size:clamp(34px,9.6vw,52px); }
+    .hero-copy .lead{ font-size:16.5px; margin-top:14px; }
+    .hero-badge{ letter-spacing:1.6px; font-size:12px; padding:6px 13px; }
+    .hero-services{ gap:14px; margin-top:18px; }
+    .hero-services span{ font-size:15px; }
+    .hero-media{ height:230px; margin-top:22px; box-shadow:0 22px 44px rgba(0,0,0,.55); }
+    .scroll-cue{ display:none; }
+    .section-pad{ padding:52px 0; }
+    .section-head{ margin-bottom:26px; }
+  }
+
+  @media (max-width:400px){
+    .logo-text{ display:none; }
+    .logo-mark{ width:36px; height:36px; border-radius:9px; }
+    header.site .bar{ height:58px; }
+    :root{ --wrap-pad:14px; }
+    .vcard .body{ padding:16px; }
+    .vcard h3{ font-size:19px; }
+    .hero-copy h1{ font-size:clamp(31px,10vw,42px); }
+  }
+
+  /* Modal como folha inferior no celular */
+  @media (max-width:480px){
+    .modal-box{ border-radius:20px 20px 0 0; max-height:93vh; }
+    .modal-box::before{
+      content:''; position:absolute; top:9px; left:50%; transform:translateX(-50%);
+      width:46px; height:4px; border-radius:4px; background:rgba(255,255,255,.28); z-index:6;
+    }
+    .modal-close{ top:18px; right:14px; width:40px; height:40px; }
+    .modal-media{ aspect-ratio:4/3; }
+    .modal-nav{ width:44px; height:44px; }
+    .admin-box{ border-radius:20px 20px 0 0; }
+    .form-actions .btn{ min-width:0; }
+  }
+
+  /* Aberto como app instalado */
+  @media (display-mode: standalone){
+    header.site{ padding-top:env(safe-area-inset-top); }
+    body{ background:var(--bg); }
+  }
 </style>
 </head>
 <body>
@@ -583,7 +774,10 @@
 <!-- ============ HEADER ============ -->
 <header class="site">
   <div class="wrap bar">
-    <a href="#home" class="logo">MB <span>REPASSE</span></a>
+    <a href="#home" class="logo" aria-label="MB Repasse — início">
+      <img src="logo.svg" alt="" class="logo-mark" width="40" height="40">
+      <span class="logo-text">MB <span>REPASSE</span></span>
+    </a>
     <nav class="main-nav" aria-label="Navegação principal">
       <a href="#veiculos">Veículos</a>
       <a href="#vender">Vender</a>
@@ -611,7 +805,7 @@
     <div class="hero-copy reveal">
       <span class="hero-badge">MB REPASSE</span>
       <h1>Seu próximo carro<br>pode estar aqui.</h1>
-      <p class="lead">A MB Repasse conecta você a oportunidades reais de veículos de repasse — com transparência do primeiro contato até a entrega.</p>
+      <p class="lead">A MB Repasse conecta você a oportunidades reais de veículos de repasse — com transparência, avaliação justa e condições facilitadas de venda, troca ou financiamento.</p>
       <div class="hero-services">
         <span>Venda</span><span>Troca</span><span>Financiamento</span>
       </div>
@@ -655,7 +849,7 @@
       <div>
         <span class="eyebrow">Estoque</span>
         <h2 class="title">Encontre seu próximo carro</h2>
-        <p class="subtitle">Confira algumas das oportunidades disponíveis na MB Repasse.</p>
+        <p class="subtitle">Confira algumas das oportunidades de veículos de repasse disponíveis na MB Repasse. Avalie, troque ou financie com condições transparentes.</p>
       </div>
     </div>
 
@@ -683,7 +877,7 @@
     <div class="split-text reveal">
       <span class="eyebrow">Venda o seu</span>
       <h2 class="title">Quer vender seu carro?</h2>
-      <p>Tem um veículo e está pensando em vender? Fale com a MB Repasse e veja as possibilidades para o seu carro.</p>
+      <p>Tem um veículo e está pensando em vender? Fale com a MB Repasse e receba uma avaliação justa e transparente para o seu carro, com condições facilitadas de venda ou troca.</p>
       <a href="#" class="btn btn-primary wa-link" data-msg="vender" target="_blank" rel="noopener">
         Quero vender meu carro <i data-lucide="arrow-right"></i>
       </a>
@@ -733,7 +927,7 @@
     <div class="split-text reveal">
       <span class="eyebrow">Troca facilitada</span>
       <h2 class="title">Quer trocar seu carro?</h2>
-      <p>Converse com a nossa equipe sobre as possibilidades de troca do seu veículo por um dos carros disponíveis na MB Repasse.</p>
+      <p>Converse com a nossa equipe sobre as possibilidades de troca do seu veículo por um dos carros disponíveis na MB Repasse. Avaliamos seu carro e oferecemos as melhores opções de negociação.</p>
       <a href="#" class="btn btn-primary wa-link" data-msg="troca" target="_blank" rel="noopener">
         Quero fazer uma troca <i data-lucide="arrow-right"></i>
       </a>
@@ -747,7 +941,7 @@
     <div class="split-text reveal">
       <span class="eyebrow">Financiamento</span>
       <h2 class="title">Facilite a compra do seu próximo carro</h2>
-      <p>Consulte com a nossa equipe as possibilidades de financiamento disponíveis para o veículo do seu interesse.</p>
+      <p>Consulte com a nossa equipe as possibilidades de financiamento disponíveis para o veículo do seu interesse. Trabalhamos com diversas instituições parceiras para oferecer as melhores condições.</p>
       <p class="disclaimer">As condições de financiamento dependem de análise de crédito e são consultadas caso a caso junto às instituições parceiras.</p>
       <a href="#" class="btn btn-primary wa-link" data-msg="financiamento" target="_blank" rel="noopener">
         Consultar financiamento <i data-lucide="arrow-right"></i>
@@ -777,7 +971,7 @@
     <div class="reveal">
       <span class="eyebrow">Quem somos</span>
       <h2 class="title">Quem está por trás da MB Repasse</h2>
-      <p class="subtitle">Um atendimento direto, feito por quem toca o negócio no dia a dia.</p>
+      <p class="subtitle">Um atendimento direto, feito por quem toca o negócio no dia a dia, com transparência e compromisso em cada negociação.</p>
     </div>
     <div class="team-grid">
       <div class="team-card reveal">
@@ -788,7 +982,7 @@
             <span class="role">Responsável principal</span>
           </div>
         </div>
-        <p>Cuida diretamente do atendimento e das negociações da MB Repasse, garantindo transparência do primeiro contato até o fechamento.</p>
+        <p>Cuida diretamente do atendimento e das negociações da MB Repasse, garantindo transparência do primeiro contato até o fechamento. Compromisso com clientes satisfeitos.</p>
       </div>
       <div class="team-card reveal">
         <div class="team-head">
@@ -798,7 +992,7 @@
             <span class="role">Sócio</span>
           </div>
         </div>
-        <p>Sócio da MB Repasse, acompanhando as operações da empresa para oferecer a melhor experiência a cada cliente.</p>
+        <p>Sócio da MB Repasse, acompanhando as operações da empresa para oferecer a melhor experiência a cada cliente. Compromisso com transparência e resultados.</p>
       </div>
     </div>
   </div>
@@ -824,7 +1018,7 @@
 <section class="final-cta">
   <div class="wrap reveal">
     <h2>Encontrou o carro que estava procurando?</h2>
-    <p>Fale com a MB Repasse e consulte as condições do veículo.</p>
+    <p>Experiência totalmente interativa — nossa equipe fornece todas as informações, fotos detalhadas e condições especiais para fechar com o veículo ideal.</p>
     <a href="#" class="btn btn-primary wa-link" data-msg="ola" target="_blank" rel="noopener">
       Falar pelo WhatsApp <i data-lucide="message-circle"></i>
     </a>
@@ -836,7 +1030,10 @@
   <div class="wrap">
     <div class="foot-grid">
       <div>
-        <div class="logo" style="margin-bottom:10px;">MB <span>REPASSE</span></div>
+        <div class="logo" style="margin-bottom:12px;">
+          <img src="logo.svg" alt="" class="logo-mark" width="40" height="40">
+          <span class="logo-text">MB <span>REPASSE</span></span>
+        </div>
         <p>Venda · Troca · Financiamento de veículos de repasse.</p>
       </div>
       <div>
@@ -1710,6 +1907,24 @@
 
   loadVehicles();
 })();
+</script>
+
+<script>
+  /* ============ MODO APP: service worker (cache offline) ============ */
+  if ('serviceWorker' in navigator && (location.protocol === 'https:' || location.protocol === 'http:')) {
+    window.addEventListener('load', function () {
+      navigator.serviceWorker.register('sw.js').catch(function () { /* sem cache offline */ });
+    });
+  }
+  /* Trava extra de zoom: impede gesto de pinça/duplo-toque mesmo em navegadores
+     que ignoram user-scalable=no no viewport */
+  (function () {
+    document.addEventListener('gesturestart', function (e) { e.preventDefault(); }, { passive: false });
+    document.addEventListener('dblclick', function (e) {
+      const t = e.target;
+      if (t && (t.tagName === 'IMG' || t.classList.contains('hero-media'))) e.preventDefault();
+    }, { passive: false });
+  })();
 </script>
 
 </body>

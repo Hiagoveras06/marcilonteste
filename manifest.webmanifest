@@ -1,0 +1,22 @@
+{
+  "name": "MB Repasse — Venda, Troca e Financiamento",
+  "short_name": "MB Repasse",
+  "description": "Veículos de repasse com transparência do primeiro contato até a entrega. Venda, troca e financiamento.",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "id": "mb-repasse",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "orientation": "portrait",
+  "background_color": "#0a0a0b",
+  "theme_color": "#0a0a0b",
+  "categories": ["automotive", "shopping", "business"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" },
+    { "src": "logo.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}
