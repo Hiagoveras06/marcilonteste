@@ -660,7 +660,7 @@
       flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none;
       -webkit-overflow-scrolling:touch; scroll-snap-type:x proximity;
       margin:0; padding:0 12px 2px 12px;
-      gap:4px; /* Espaçamento maior para toque */
+      gap:8px; /* Espaçamento adequado para toque */
     }
     .filter-chips::-webkit-scrollbar{ display:none; }
     .chip{ flex:0 0 auto; white-space:nowrap; scroll-snap-align:start; padding:8px 10px; font-size:12px; }
@@ -1305,9 +1305,26 @@
   const chips = document.querySelectorAll('.chip');
   let activeFilter = 'all';
 
-  function placeholderImg(brand, model){
+  function placeholderImg(brand, model, type){
+    // type: 'sell', 'trade', 'finance' or default
+    const texts = {
+      sell: 'Quer vender seu carro',
+      trade: 'Quer trocar seu carro', 
+      finance: 'Facilite a compra do seu próximo carro'
+    };
+    const text = texts[type] || 'Foto indisponível';
+    const colors = {
+      sell: '#d91f2c',
+      trade: '#dc2626', 
+      finance: '#ea580c'
+    };
+    const bgColors = {
+      sell: 'rgba(217,31,44,0.1)',
+      trade: 'rgba(220,38,38,0.1)', 
+      finance: 'rgba(234,88,12,0.1)'
+    };
     return `data:image/svg+xml;utf8,${encodeURIComponent(
-      `<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'><rect width='100%' height='100%' fill='#1b1b1e'/><text x='50%' y='50%' fill='#6e6e72' font-family='sans-serif' font-size='16' text-anchor='middle'>Foto indisponível</text></svg>`
+      `<svg xmlns='http://www.w3.org/2000/svg' width='400' height='300'><rect width='100%' height='100%' fill='${bgColors[type] || '#1b1b1e'}'/></svg>`
     )}`;
   }
 
@@ -1336,21 +1353,33 @@
       return;
     }
 
-    grid.innerHTML = filtered.map(v => `
-      <article class="vcard" data-id="${v.id}" tabindex="0" role="button" aria-label="Ver detalhes de ${v.brand} ${v.model}">
-        <div class="media">
-          ${v.badge ? `<span class="badge">${v.badge}</span>` : ''}
-          ${(v.images && v.images.length > 1) ? `<span class="badge photo-count"><i data-lucide="image-plus"></i> ${v.images.length}</span>` : ''}
-          <img src="${(v.images && v.images[0]) || placeholderImg(v.brand,v.model)}" alt="${v.brand} ${v.model}${v.year ? ' ' + v.year : ''}" loading="lazy">
-        </div>
-        <div class="body">
-          <h3>${v.brand} ${v.model}</h3>
-          <div class="meta">${[v.year, v.mileage].filter(Boolean).join(' · ')}</div>
-          ${v.price ? `<div class="price">${v.price}</div>` : ''}
-          <button class="btn btn-primary btn-block open-vehicle" data-id="${v.id}">Me interessei</button>
-        </div>
-      </article>
-    `).join('');
+    grid.innerHTML = filtered.map((v, i) => {
+      const types = ['sell', 'trade', 'finance'];
+      const type = types[i % 3];
+      const categoryMap = {
+        carro: 'sell',
+        suv: 'trade', 
+        picape: 'finance',
+        outro: 'sell'
+      };
+      const finalType = categoryMap[v.category] || type;
+      
+      return `
+        <article class="vcard" data-id="${v.id}" tabindex="0" role="button" aria-label="Ver detalhes de ${v.brand} ${v.model}">
+          <div class="media">
+            ${v.badge ? `<span class="badge">${v.badge}</span>` : ''}
+            ${(v.images && v.images.length > 1) ? `<span class="badge photo-count"><i data-lucide="image-plus"></i> ${v.images.length}</span>` : ''}
+            <img src="${(v.images && v.images[0]) || placeholderImg(v.brand,v.model, finalType)}" alt="${v.brand} ${v.model}${v.year ? ' ' + v.year : ''}" loading="lazy">
+          </div>
+          <div class="body">
+            <h3>${v.brand} ${v.model}</h3>
+            <div class="meta">${[v.year, v.mileage].filter(Boolean).join(' · ')}</div>
+            ${v.price ? `<div class="price">${v.price}</div>` : ''}
+            <button class="btn btn-primary btn-block open-vehicle" data-id="${v.id}">Me interessei</button>
+          </div>
+        </article>
+      `;
+    }).join('');
 
     grid.querySelectorAll('.open-vehicle').forEach(btn=>{
       btn.addEventListener('click', (e)=>{ e.stopPropagation(); openModal(btn.dataset.id); });
