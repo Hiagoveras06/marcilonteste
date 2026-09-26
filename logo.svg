@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 1248 1248" role="img" aria-label="MB Veículos">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#101013"/>
+      <stop offset="0.45" stop-color="#08080a"/>
+      <stop offset="1" stop-color="#0c0c0f"/>
+    </linearGradient>
+    <radialGradient id="halo" cx="0.5" cy="0.42" r="0.62">
+      <stop offset="0" stop-color="#26262c" stop-opacity="0.75"/>
+      <stop offset="0.55" stop-color="#141418" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="floor" cx="0.5" cy="1" r="0.75">
+      <stop offset="0" stop-color="#1a1a1f" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#000000" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="redGlow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#ff1f2e" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#ff1f2e" stop-opacity="0"/>
+    </radialGradient>
+
+    <linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9aa0a7"/>
+      <stop offset="0.08" stop-color="#ffffff"/>
+      <stop offset="0.26" stop-color="#dfe3e7"/>
+      <stop offset="0.44" stop-color="#84898f"/>
+      <stop offset="0.50" stop-color="#5a5f65"/>
+      <stop offset="0.56" stop-color="#a7adb3"/>
+      <stop offset="0.74" stop-color="#f4f6f7"/>
+      <stop offset="0.90" stop-color="#c1c6cb"/>
+      <stop offset="1" stop-color="#6f747a"/>
+    </linearGradient>
+    <linearGradient id="chrome2" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#f7f8f9"/>
+      <stop offset="0.30" stop-color="#cfd4d8"/>
+      <stop offset="0.50" stop-color="#7d8288"/>
+      <stop offset="0.70" stop-color="#e9ecee"/>
+      <stop offset="1" stop-color="#787d83"/>
+    </linearGradient>
+    <linearGradient id="redBand" x1="0" y1="0" x2="1" y2="0.6">
+      <stop offset="0" stop-color="#8d0d16"/>
+      <stop offset="0.22" stop-color="#e11b2c"/>
+      <stop offset="0.55" stop-color="#ff3344"/>
+      <stop offset="0.78" stop-color="#d5121f"/>
+      <stop offset="1" stop-color="#7c0b12"/>
+    </linearGradient>
+    <linearGradient id="silverBand" x1="0" y1="0" x2="1" y2="0.4">
+      <stop offset="0" stop-color="#6f747a"/>
+      <stop offset="0.20" stop-color="#e9ecee"/>
+      <stop offset="0.50" stop-color="#ffffff"/>
+      <stop offset="0.76" stop-color="#c8cdd2"/>
+      <stop offset="1" stop-color="#7a7f85"/>
+    </linearGradient>
+
+    <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="14" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- fundo -->
+  <rect width="1248" height="1248" fill="url(#bg)"/>
+  <rect width="1248" height="1248" fill="url(#halo)"/>
+
+  <!-- faixas diagonais (canto superior esquerdo) -->
+  <g>
+    <path d="M-40 210 L210 -40" stroke="#26262c" stroke-width="54" fill="none"/>
+    <path d="M20 300 L300 20" stroke="#ff2333" stroke-width="13" fill="none" opacity="0.95"/>
+    <path d="M20 300 L300 20" stroke="#ff2333" stroke-width="34" fill="none" opacity="0.16"/>
+  </g>
+  <!-- faixas diagonais (canto inferior direito) -->
+  <g>
+    <path d="M948 1228 L1228 948" stroke="#ff2333" stroke-width="13" fill="none" opacity="0.95"/>
+    <path d="M948 1228 L1228 948" stroke="#ff2333" stroke-width="34" fill="none" opacity="0.16"/>
+    <path d="M1038 1288 L1288 1038" stroke="#26262c" stroke-width="54" fill="none"/>
+  </g>
+
+  <!-- reflexo do piso -->
+  <rect x="0" y="940" width="1248" height="308" fill="url(#floor)"/>
+  <ellipse cx="180" cy="1120" rx="170" ry="70" fill="url(#redGlow)" opacity="0.5"/>
+  <ellipse cx="1090" cy="1150" rx="150" ry="60" fill="url(#redGlow)" opacity="0.35"/>
+
+  <!-- silhueta do carro -->
+  <g>
+    <!-- friso vermelho (teto/linha superior) -->
+    <path d="M112 448 C240 318 430 252 660 248 C895 244 1072 312 1156 402 L1134 440 C1040 368 878 306 655 310 C450 316 250 396 112 448 Z"
+          fill="url(#redBand)" filter="url(#softGlow)"/>
+    <!-- linha de destaque branca sob o friso -->
+    <path d="M300 366 C470 322 660 306 850 314 C988 320 1090 352 1150 404 L1140 424 C1078 374 984 348 852 342 C664 334 482 350 322 392 Z"
+          fill="url(#chrome2)" opacity="0.92"/>
+    <!-- carroceria prateada (linha inferior) -->
+    <path d="M110 474 C300 430 520 402 720 398 C900 394 1052 414 1152 452 L1140 492 C1030 456 890 440 715 444 C520 450 300 478 128 522 Z"
+          fill="url(#silverBand)"/>
+    <!-- brilho interno da carroceria -->
+    <path d="M200 484 C360 452 540 430 720 426 C880 422 1010 436 1120 466 L1116 480 C1010 452 884 440 722 444 C544 448 372 468 214 496 Z"
+          fill="#ffffff" opacity="0.55"/>
+  </g>
+
+  <!-- tipografia -->
+  <g>
+    <text x="624" y="784" text-anchor="middle"
+          font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-weight="900" font-style="italic"
+          font-size="400" textLength="850" lengthAdjust="spacingAndGlyphs"
+          fill="#000000" opacity="0.75" transform="translate(8,12)">MB</text>
+    <text x="624" y="784" text-anchor="middle"
+          font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-weight="900" font-style="italic"
+          font-size="400" textLength="850" lengthAdjust="spacingAndGlyphs"
+          fill="url(#chrome)" stroke="#3d4147" stroke-width="4">MB</text>
+
+    <text x="624" y="948" text-anchor="middle"
+          font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-weight="900" font-style="italic"
+          font-size="176" textLength="990" lengthAdjust="spacingAndGlyphs"
+          fill="#000000" opacity="0.7" transform="translate(6,9)">VEÍCULOS</text>
+    <text x="624" y="948" text-anchor="middle"
+          font-family="'Arial Black','Helvetica Neue',Arial,sans-serif" font-weight="900" font-style="italic"
+          font-size="176" textLength="990" lengthAdjust="spacingAndGlyphs"
+          fill="url(#chrome)" stroke="#3d4147" stroke-width="3">VEÍCULOS</text>
+  </g>
+</svg>
