@@ -214,9 +214,9 @@
     .hero-media::after{
       background:linear-gradient(90deg, rgba(10,10,11,.18), transparent 12%, transparent 88%, rgba(10,10,11,.18));
     }
-    .hero-ctas{ margin:24px 8px 0; }
+    .hero-ctas{ margin:24px 8px 0; gap:20px; }
     .hero-ctas .btn{ width:100%; justify-content:center; }
-    .scroll-cue{ display:none; }
+    .scroll-cue{ display:flex; margin:28px auto 0; }
   }
 
   .hero-copy h1{ font-size:clamp(40px,7vw,72px); line-height:0.98; }
@@ -734,7 +734,7 @@
 
     /* Barra do WhatsApp com área segura */
     .mobile-bar{
-      display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:4px;
+      display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:4px;
       padding:7px 8px calc(7px + env(safe-area-inset-bottom)); min-height:64px;
       background:rgba(21,21,23,.97); border-top:1px solid var(--border);
       box-shadow:0 -8px 24px rgba(0,0,0,.42);
@@ -745,9 +745,9 @@
       min-width:0; min-height:46px; color:var(--text-muted); font-size:10px; font-weight:700;
       line-height:1.1; text-align:center; white-space:nowrap; touch-action:manipulation;
     }
-    .mobile-bar a:first-child{ color:var(--red); }
+    .mobile-bar a.is-active{ color:var(--red); }
     .mobile-bar svg{ width:19px; height:19px; flex-shrink:0; }
-    .mobile-bar a:active{ color:var(--text); }
+    .mobile-bar a:active{ color:var(--red); }
 
     /* Botão flutuante do assistente - maior para touch */
     .fab{
@@ -776,7 +776,7 @@
     .hero-services span{ font-size:15px; padding:9px 18px; }
     .hero-ctas{ margin:40px 8px 0; }
     .hero-media{ height:230px; margin-top:22px; box-shadow:0 22px 44px rgba(0,0,0,.55); }
-    .scroll-cue{ display:none; }
+    .scroll-cue{ display:flex; margin:28px auto 0; }
     .section-pad{ padding:38px 0; }
     .section-head{ margin-bottom:26px; }
   }
@@ -1236,6 +1236,7 @@
 
 <!-- ============ NAVEGAÇÃO MOBILE ============ -->
 <nav class="mobile-bar" aria-label="Atalhos principais">
+  <a href="#home" class="is-active" aria-label="Ir para o início"><i data-lucide="home"></i><span>Início</span></a>
   <a href="#veiculos" aria-label="Ver veículos"><i data-lucide="car"></i><span>Veículos</span></a>
   <a href="#vender" aria-label="Vender meu carro"><i data-lucide="banknote"></i><span>Vender</span></a>
   <a href="#troca" aria-label="Trocar meu carro"><i data-lucide="refresh-ccw"></i><span>Troca</span></a>
@@ -1247,6 +1248,7 @@
   /* ============ ÍCONES (SVG embutido — sem depender de CDN externo) ============ */
   const ICONS = {
     x: '<line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line>',
+    home: '<path d="m3 10 9-7 9 7"></path><path d="M9 21V12h6v9"></path><path d="M5 10v11h14V10"></path>',
     check: '<polyline points="20 6 9 17 4 12"></polyline>',
     'check-circle': '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline>',
     'message-circle': '<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>',
@@ -1284,6 +1286,15 @@
     });
   }
   renderIcons(); // ícones estáticos do HTML, já disponíveis sem esperar nada externo
+
+  const mobileBar = document.querySelector('.mobile-bar');
+  if(mobileBar){
+    mobileBar.addEventListener('click', event=>{
+      const link = event.target.closest('a');
+      if(!link || !mobileBar.contains(link)) return;
+      mobileBar.querySelectorAll('a').forEach(item=>item.classList.toggle('is-active', item === link));
+    });
+  }
 
   const WA_BASE = "https://wa.link/lg5rmn";
   const MESSAGES = {
