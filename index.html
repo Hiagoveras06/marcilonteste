@@ -94,6 +94,9 @@
     -webkit-font-smoothing:antialiased;
     line-height:1.5;
   }
+  @media (max-width:720px){
+    html, body{ width:100%; overflow-x:clip; }
+  }
   img{max-width:100%; display:block;}
   a{color:inherit; text-decoration:none;}
   button{font-family:inherit; cursor:pointer;}
@@ -362,7 +365,7 @@
   .insta-band p{ color:var(--text-muted); font-size:14px; margin:2px 0 0; }
   @media (max-width:720px){
     .insta-band{ padding:32px 10px; gap:18px; }
-    .insta-band .txt{ width:100%; }
+    .insta-band .txt{ width:100%; padding-inline:0; }
     .insta-band .btn{ width:100%; justify-content:center; margin-left:0; }
   }
 
@@ -403,6 +406,7 @@
     margin-top:40px; padding-top:24px; border-top:1px solid var(--border-soft);
     font-size:12.5px; color:var(--text-dim); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
   }
+  .mobile-footer-start{ display:none; }
 
   /* Modal */
   .modal-overlay{
@@ -471,6 +475,7 @@
     box-shadow:0 6px 20px rgba(217,31,44,0.4);
   }
   .fab svg{ width:26px; height:26px; color:#fff; }
+  .fab.is-covered, .assist-panel.is-covered{ opacity:0; visibility:hidden; pointer-events:none; }
   @media (max-width:720px){ .fab{ bottom:88px; right:16px; width:54px; height:54px; } }
 
   .assist-panel{
@@ -668,17 +673,14 @@
     .eyebrow{ font-size:13px; letter-spacing:.6px; }
 
     /* Busca + filtros em faixa deslizante - organizada para touch */
-    .toolbar{ gap:10px; margin-bottom:24px; flex-wrap:nowrap; }
-    .search-box{ min-width:100%; }
+    .toolbar{ display:grid; grid-template-columns:minmax(0,1fr); gap:12px; margin-bottom:22px; }
+    .search-box{ width:100%; min-width:0; }
     .search-box input{ padding:14px 14px 14px 42px; font-size:15px; }
     .filter-chips{
-      flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; -ms-overflow-style:none;
-      -webkit-overflow-scrolling:touch; scroll-snap-type:x proximity;
-      margin:0 -16px; padding:0 16px 2px;
-      gap:6px; /* Espaçamento maior para toque */
+      width:100%; flex-wrap:wrap; overflow:visible; margin:0; padding:0;
+      gap:7px;
     }
-    .filter-chips::-webkit-scrollbar{ display:none; }
-    .chip{ flex:0 0 auto; white-space:nowrap; scroll-snap-align:start; padding:11px 18px; font-size:14px; }
+    .chip{ flex:0 0 auto; white-space:nowrap; padding:9px 12px; font-size:13px; }
 
     /* Confiança - maiores para touch */
     .trust-item{ padding:16px 14px; gap:14px; justify-content:flex-start; }
@@ -695,33 +697,57 @@
     .final-cta .btn{ width:100%; justify-content:center; min-height:56px; padding:16px 36px; font-size:16px; }
 
     /* Cartões de veículos - tocável */
-    .vehicle-grid{ gap:20px; }
-    .vcard .media{ aspect-ratio:16/11; }
-    .vcard .body{ padding:20px; }
-    .vcard h3{ font-size:22px; }
-    .vcard .price{ font-size:26px; }
-    .vcard .btn{ min-height:48px; padding:12px 20px; font-size:14px; }
+    .vehicle-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px; }
+    .vcard{ min-width:0; }
+    .vcard .media{ aspect-ratio:4/3; }
+    .vcard .body{ min-width:0; padding:12px; gap:7px; }
+    .vcard h3{ font-size:17px; overflow-wrap:anywhere; }
+    .vcard .meta{ font-size:11px; line-height:1.35; }
+    .vcard .price{ font-size:21px; line-height:1.1; }
+    .vcard .price small{ font-size:9px; }
+    .vcard .btn{ min-height:42px; padding:9px 8px; font-size:12px; white-space:normal; }
+    .vcard .badge{ top:8px; left:8px; padding:4px 8px; font-size:10px; }
+    .vcard .badge.photo-count{ right:8px; }
 
     /* Painéis organizados verticalmente no mobile */
     .split-visual{ aspect-ratio:16/10; order:1; } /* Visual em primeiro no mobile */
     .split-text{ order:2; } /* Texto em segundo */
     .split-text p{ font-size:15px; margin-top:12px; }
     .team-card{ padding:20px; margin-bottom:16px; }
-    .insta-band{ padding:32px 0; gap:26px; }
+    .insta-band{ padding:26px var(--wrap-pad); gap:20px; }
     .insta-band h3{ font-size:18px; }
-    .final-cta{ padding:60px 0 40px; }
+    .final-cta{ padding:48px 0 34px; }
 
     /* Rodapé - área segura acima da barra */
-    footer.site{ padding-bottom:calc(100px + env(safe-area-inset-bottom)); }
+    footer.site{ padding:28px 0 calc(84px + env(safe-area-inset-bottom)); }
+    .mobile-footer-start{
+      display:grid; grid-template-columns:1fr 1fr; gap:10px;
+      padding-bottom:22px; margin-bottom:22px; border-bottom:1px solid var(--border-soft);
+    }
+    .mobile-footer-start a{
+      min-height:44px; display:flex; align-items:center; justify-content:center; gap:8px;
+      padding:9px 8px; border:1px solid var(--border); color:var(--text);
+      font-size:12px; font-weight:700; text-align:center;
+    }
+    .mobile-footer-start a:first-child{ background:var(--red); border-color:var(--red); }
+    .mobile-footer-start svg{ width:16px; height:16px; flex-shrink:0; }
 
     /* Barra do WhatsApp com área segura */
     .mobile-bar{
-      padding:16px 16px calc(16px + env(safe-area-inset-bottom));
-      min-height:56px; letter-spacing:.4px;
-      background:linear-gradient(180deg,#e12334 0%,#c11722 60%,#a3151f 100%);
-      box-shadow:0 -10px 26px rgba(0,0,0,.45);
+      display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:4px;
+      padding:7px 8px calc(7px + env(safe-area-inset-bottom)); min-height:64px;
+      background:rgba(21,21,23,.97); border-top:1px solid var(--border);
+      box-shadow:0 -8px 24px rgba(0,0,0,.42);
+      backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
     }
-    .mobile-bar:active{ filter:brightness(1.08); }
+    .mobile-bar a{
+      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
+      min-width:0; min-height:46px; color:var(--text-muted); font-size:10px; font-weight:700;
+      line-height:1.1; text-align:center; white-space:nowrap; touch-action:manipulation;
+    }
+    .mobile-bar a:first-child{ color:var(--red); }
+    .mobile-bar svg{ width:19px; height:19px; flex-shrink:0; }
+    .mobile-bar a:active{ color:var(--text); }
 
     /* Botão flutuante do assistente - maior para touch */
     .fab{
@@ -746,11 +772,12 @@
     .hero-copy h1{ font-size:clamp(34px,9.6vw,52px); }
     .hero-copy .lead{ font-size:16.5px; margin-top:14px; }
     .hero-badge{ letter-spacing:1.6px; font-size:12px; padding:6px 13px; }
-    .hero-services{ gap:14px; margin-top:18px; }
-    .hero-services span{ font-size:15px; }
+    .hero-services{ gap:18px; margin-top:20px; }
+    .hero-services span{ font-size:15px; padding:9px 18px; }
+    .hero-ctas{ margin:40px 8px 0; }
     .hero-media{ height:230px; margin-top:22px; box-shadow:0 22px 44px rgba(0,0,0,.55); }
     .scroll-cue{ display:none; }
-    .section-pad{ padding:52px 0; }
+    .section-pad{ padding:38px 0; }
     .section-head{ margin-bottom:26px; }
   }
 
@@ -821,7 +848,7 @@
     <div class="hero-copy reveal">
       <span class="hero-badge">MB REPASSE</span>
       <h1>Seu próximo carro<br>pode estar aqui.</h1>
-      <p class="lead">A MB Repasse conecta você a oportunidades reais de veículos de repasse — com transparência, avaliação justa e condições facilitadas de venda, troca ou financiamento.</p>
+      <p class="lead">Encontre boas oportunidades de veículos com transparência, avaliação justa e condições facilitadas para vender, trocar ou financiar.</p>
       <div class="hero-services">
         <span>Venda</span><span>Troca</span><span>Financiamento</span>
       </div>
@@ -865,7 +892,7 @@
       <div>
         <span class="eyebrow">Estoque</span>
         <h2 class="title">Encontre seu próximo carro</h2>
-        <p class="subtitle">Confira algumas das oportunidades de veículos de repasse disponíveis na MB Repasse. Avalie, troque ou financie com condições transparentes.</p>
+        <p class="subtitle">Confira os veículos disponíveis e converse com nossa equipe sobre venda, troca ou financiamento.</p>
       </div>
     </div>
 
@@ -943,7 +970,7 @@
     <div class="split-text reveal">
       <span class="eyebrow">Troca facilitada</span>
       <h2 class="title">Quer trocar seu carro?</h2>
-      <p>Converse com a nossa equipe sobre as possibilidades de troca do seu veículo por um dos carros disponíveis na MB Repasse. Avaliamos seu carro e oferecemos as melhores opções de negociação.</p>
+      <p>Converse com nossa equipe sobre a troca do seu veículo por um dos carros disponíveis. Avaliamos seu carro e apresentamos as opções de negociação.</p>
       <a href="#" class="btn btn-primary wa-link" data-msg="troca" target="_blank" rel="noopener">
         Quero fazer uma troca <i data-lucide="arrow-right"></i>
       </a>
@@ -1034,7 +1061,7 @@
 <section class="final-cta">
   <div class="wrap reveal">
     <h2>Encontrou o carro que estava procurando?</h2>
-    <p>Experiência totalmente interativa — nossa equipe fornece todas as informações, fotos detalhadas e condições especiais para fechar com o veículo ideal.</p>
+    <p>Conte com nossa equipe para receber informações, fotos detalhadas e condições especiais para fechar negócio.</p>
     <a href="#" class="btn btn-primary wa-link" data-msg="ola" target="_blank" rel="noopener">
       Falar pelo WhatsApp <i data-lucide="message-circle"></i>
     </a>
@@ -1044,6 +1071,10 @@
 <!-- ============ FOOTER ============ -->
 <footer class="site">
   <div class="wrap">
+    <div class="mobile-footer-start">
+      <a href="#" class="wa-link" data-msg="ola" target="_blank" rel="noopener"><i data-lucide="message-circle"></i> Fale com a equipe</a>
+      <a href="https://www.instagram.com/mb_repasse/" target="_blank" rel="noopener"><i data-lucide="instagram"></i> Instagram</a>
+    </div>
     <div class="foot-grid">
       <div>
         <div class="logo" style="margin-bottom:12px;">
@@ -1055,8 +1086,8 @@
       <div>
         <h4>Equipe</h4>
         <div class="foot-links">
-          <span>Marcilon Barros — Responsável principal</span>
-          <span>Victor Hugo — Sócio</span>
+          <span>Marcilon Barros, responsável principal</span>
+          <span>Victor Hugo, sócio</span>
         </div>
       </div>
       <div>
@@ -1203,10 +1234,13 @@
   <i data-lucide="message-circle"></i>
 </button>
 
-<!-- ============ MOBILE STICKY BAR ============ -->
-<a href="#" class="mobile-bar wa-link" data-msg="ola" target="_blank" rel="noopener">
-  <i data-lucide="message-circle"></i> Falar no WhatsApp
-</a>
+<!-- ============ NAVEGAÇÃO MOBILE ============ -->
+<nav class="mobile-bar" aria-label="Atalhos principais">
+  <a href="#veiculos" aria-label="Ver veículos"><i data-lucide="car"></i><span>Veículos</span></a>
+  <a href="#vender" aria-label="Vender meu carro"><i data-lucide="banknote"></i><span>Vender</span></a>
+  <a href="#troca" aria-label="Trocar meu carro"><i data-lucide="refresh-ccw"></i><span>Troca</span></a>
+  <a href="#financiamento" aria-label="Consultar financiamento"><i data-lucide="credit-card"></i><span>Financiar</span></a>
+</nav>
 
 <script>
 (function(){
@@ -1223,6 +1257,7 @@
     'arrow-right': '<line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline>',
     'arrow-up-right': '<line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline>',
     instagram: '<rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>',
+    banknote: '<rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="12" cy="12" r="2"></circle><path d="M6 12h.01M18 12h.01"></path>',
     car: '<path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H5.24a2 2 0 0 0-1.8 1.1l-.8 1.63A6 6 0 0 0 2 12.42V16h2"></path><circle cx="6.5" cy="16.5" r="2.5"></circle><circle cx="16.5" cy="16.5" r="2.5"></circle>',
     'refresh-ccw': '<polyline points="1 4 1 10 7 10"></polyline><polyline points="23 20 23 14 17 14"></polyline><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"></path>',
     'credit-card': '<rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line>',
@@ -1422,7 +1457,7 @@
         ${v.price ? `<div class="price">${v.price}</div>` : ''}
         ${v.description ? `<p class="desc">${v.description}</p>` : ''}
         <a href="${waUrl(null, fullName)}" target="_blank" rel="noopener" class="btn btn-primary btn-block">
-          <i data-lucide="message-circle"></i> Me interessei — falar no WhatsApp
+          <i data-lucide="message-circle"></i> Me interessei. Falar no WhatsApp
         </a>
       </div>
     `;
@@ -1490,6 +1525,16 @@
     const isOpen = panel.classList.toggle('open');
     fab.setAttribute('aria-expanded', isOpen);
   });
+
+  const heroContact = document.querySelector('.hero-ctas .wa-link');
+  if('IntersectionObserver' in window && heroContact){
+    const contactObserver = new IntersectionObserver(([entry])=>{
+      const isMobileContactVisible = entry.isIntersecting && window.matchMedia('(max-width: 720px)').matches;
+      fab.classList.toggle('is-covered', isMobileContactVisible);
+      panel.classList.toggle('is-covered', isMobileContactVisible);
+    }, { threshold: 0.1 });
+    contactObserver.observe(heroContact);
+  }
 
   panel.querySelectorAll('.qr-btn').forEach(btn=>{
     btn.addEventListener('click', ()=>{
